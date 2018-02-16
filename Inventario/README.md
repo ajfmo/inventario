@@ -15,6 +15,8 @@ Here you will find useful techniques and methodologies (or I hope so), such as:
 *	Use of HQL to manipulate data.
 *	Event management inside TableView and TableColumn (edit cell and get calculations in another).
 
+Theres a .sql file that creates tables, you shall create the schema "inventario", a user named inventario and password inventario.
+
 Hope you fork and practice with this repo too.
 
 :up: :star:
