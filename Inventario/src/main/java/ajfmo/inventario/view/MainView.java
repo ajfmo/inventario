@@ -47,7 +47,7 @@ public class MainView implements Initializable {
 	@FXML
 	private TableColumn<Productos, Double> inventoryCol;
 	@FXML
-	private TableColumn<Deposito, String> depositCol;
+	private TableColumn<Productos, String> depositCol;
 	@FXML
 	private ComboBox<Deposito> depositCbo;
 
@@ -71,95 +71,27 @@ public class MainView implements Initializable {
 
 		productsTbl.isEditable();
 
+		// Make TableColumn Editable with setCellFactory method
+		descriptionCol.setCellFactory(TextFieldTableCell.forTableColumn());
+		costCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+		utilCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+		priceCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+		inventoryCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+
 		fillDepositCbo(depositList);
 		fillProductsTbl(productList);
 
 		depositCbo.setItems(depositList);
 		productsTbl.setItems(productList);
 
-		// codeCol.setCellValueFactory(new PropertyValueFactory<Productos,
-		// String>("idProductos"));
-		// descriptionCol.setCellValueFactory(new PropertyValueFactory<Productos,
-		// String>("descripcionProducto"));
-		// costCol.setCellValueFactory(new PropertyValueFactory<Productos,
-		// Double>("costoProducto"));
-		// utilCol.setCellValueFactory(new PropertyValueFactory<Productos,
-		// Double>("utilidadProducto"));
-		// priceCol.setCellValueFactory(new PropertyValueFactory<Productos,
-		// Double>("precioProducto"));
-		// inventoryCol.setCellValueFactory(new PropertyValueFactory<Productos,
-		// Double>("existenciaProducto"));
-		// depositCol.setCellValueFactory(new PropertyValueFactory<Productos,
-		// String>("deposito"));
-
-		// data -> data.getValue().initialProperty().asObject()
-
-		codeCol.setCellValueFactory(dataProd -> dataProd.getValue().IdProductosProperty());
-		descriptionCol.setCellValueFactory(dataProd -> dataProd.getValue().DescripcionProductoProperty());
-		costCol.setCellValueFactory(dataProd -> dataProd.getValue().CostoProductoProperty().asObject());
-		utilCol.setCellValueFactory(dataProd -> dataProd.getValue().UtilidadProductoProperty().asObject());
-		priceCol.setCellValueFactory(dataProd -> dataProd.getValue().PrecioProductoProperty().asObject());
-		inventoryCol.setCellValueFactory(dataProd -> dataProd.getValue().ExistenciaProductoProperty().asObject());
-		// depositCol.setCellValueFactory(dataDep ->
-		// dataDep.getValue().getDescripcionDeposito());
-
-		// ObservableList<Productos> dataProd = FXCollections.observableArrayList();
-		// ObservableList<Deposito> dataDep = FXCollections.observableArrayList();
-
-		// La siguiente linea habilita la edicion de la celda (Por defecto
-		// fortableColumn solo funciona con String)
-		descriptionCol.setCellFactory(TextFieldTableCell.forTableColumn());
-		// En este caso forTableColumn recibe como parametro una instancia de
-		// DoubleStringConverter para que pueda funcionar con Double
-		costCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
-		utilCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
-		priceCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
-		inventoryCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
-
-		// descriptionCol.setOnEditCommit(new
-		// EventHandler<TableColumn.CellEditEvent<Productos, String>>() {
-		// @Override
-		// public void handle(CellEditEvent<Productos, String> event) {
-		// event.getTableView().getItems().get(event.getTablePosition().getRow())
-		// .setDescripcionProducto(event.getNewValue());
-		// }
-		// });
-		//
-		// costCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Productos,
-		// Double>>() {
-		// @Override
-		// public void handle(CellEditEvent<Productos, Double> event) {
-		// event.getTableView().getItems().get(event.getTablePosition().getRow())
-		// .setCostoProducto(event.getNewValue());
-		// }
-		// });
-		//
-		// utilCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Productos,
-		// Double>>() {
-		// @Override
-		// public void handle(CellEditEvent<Productos, Double> event) {
-		// event.getTableView().getItems().get(event.getTablePosition().getRow())
-		// .setUtilidadProducto(event.getNewValue());
-		// }
-		// });
-		//
-		// priceCol.setOnEditCommit(new
-		// EventHandler<TableColumn.CellEditEvent<Productos, Double>>() {
-		// @Override
-		// public void handle(CellEditEvent<Productos, Double> event) {
-		// event.getTableView().getItems().get(event.getTablePosition().getRow())
-		// .setPrecioProducto(event.getNewValue());
-		// }
-		// });
-		//
-		// inventoryCol.setOnEditCommit(new
-		// EventHandler<TableColumn.CellEditEvent<Productos, Double>>() {
-		// @Override
-		// public void handle(CellEditEvent<Productos, Double> event) {
-		// event.getTableView().getItems().get(event.getTablePosition().getRow())
-		// .setExistenciaProducto(event.getNewValue());
-		// }
-		// });
+		// Bind the Column with the data
+		codeCol.setCellValueFactory(data -> data.getValue().IdProductosProperty());
+		descriptionCol.setCellValueFactory(data -> data.getValue().DescripcionProductoProperty());
+		costCol.setCellValueFactory(data -> data.getValue().CostoProductoProperty().asObject());
+		utilCol.setCellValueFactory(data -> data.getValue().UtilidadProductoProperty().asObject());
+		priceCol.setCellValueFactory(data -> data.getValue().PrecioProductoProperty().asObject());
+		inventoryCol.setCellValueFactory(data -> data.getValue().ExistenciaProductoProperty().asObject());
+		depositCol.setCellValueFactory(dataDep -> dataDep.getValue().getDeposito().DescripcionDepositoProperty());
 
 	}
 
@@ -168,13 +100,10 @@ public class MainView implements Initializable {
 	 */
 	@FXML
 	private void create() {
-		// product.createProduct(txtCode.getText(), txtDescription.getText(),
-		// Double.parseDouble(txtCost.getText()),
-		// Double.parseDouble(txtUtil.getText()),
-		// Double.parseDouble(txtPrice.getText()),
-		// Double.parseDouble(txtInventory.getText()),
-		// depositCbo.getValue().getDescripcionDeposito());
-		// cancel();
+		product.createProduct(txtCode.getText(), txtDescription.getText(), Double.parseDouble(txtCost.getText()),
+				Double.parseDouble(txtUtil.getText()), Double.parseDouble(txtPrice.getText()),
+				Double.parseDouble(txtInventory.getText()), depositCbo.getValue().getDescripcionDeposito());
+		cancel();
 	}
 
 	/**

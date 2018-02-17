@@ -11,17 +11,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.AccessType;
-
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -104,15 +99,25 @@ public class Deposito implements java.io.Serializable {
 		return descripcionDeposito;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "deposito")
 	private Set<Productos> productoses = new HashSet<Productos>(0);
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "deposito")
 	public Set<Productos> getProductoses() {
 		return this.productoses;
 	}
 
 	public void setProductoses(Set<Productos> productoses) {
 		this.productoses = productoses;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return _descripcionDeposito;
 	}
 
 }
