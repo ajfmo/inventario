@@ -100,10 +100,10 @@ public class MainView implements Initializable {
 	 */
 	@FXML
 	private void create() {
-		product.createProduct(txtCode.getText(), txtDescription.getText(), Double.parseDouble(txtCost.getText()),
-				Double.parseDouble(txtUtil.getText()), Double.parseDouble(txtPrice.getText()),
-				Double.parseDouble(txtInventory.getText()), depositCbo.getValue().getDescripcionDeposito());
-		cancel();
+//		product.createProduct(txtCode.getText(), txtDescription.getText(), Double.parseDouble(txtCost.getText()),
+//				Double.parseDouble(txtUtil.getText()), Double.parseDouble(txtPrice.getText()),
+//				Double.parseDouble(txtInventory.getText()), depositCbo.getValue().getDescripcionDeposito());
+//		cancel();
 	}
 
 	/**
