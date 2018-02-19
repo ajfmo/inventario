@@ -42,7 +42,7 @@ public class Productos implements java.io.Serializable {
 		this.descripcionProducto = new SimpleStringProperty(descripcionProducto);
 		this.costoProducto = new SimpleDoubleProperty(costoProducto);
 		this.utilidadProducto = new SimpleDoubleProperty(utilidadProducto);
-		this.precioProducto = new SimpleDoubleProperty(costoProducto / 100 - utilidadProducto / 100);
+		this.precioProducto = new SimpleDoubleProperty(costoProducto / (100 - utilidadProducto / 100));
 		// Magia
 		this.precioProducto.bind(this.costoProducto.multiply(this.precioProducto));
 		this.existenciaProducto = new SimpleDoubleProperty(existenciaProducto);
