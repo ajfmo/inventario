@@ -71,27 +71,28 @@ public class MainView implements Initializable {
 
 		productsTbl.isEditable();
 
-		// Make TableColumn Editable with setCellFactory method
-		descriptionCol.setCellFactory(TextFieldTableCell.forTableColumn());
-		costCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
-		utilCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
-		priceCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
-		inventoryCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
-
 		fillDepositCbo(depositList);
 		fillProductsTbl(productList);
 
 		depositCbo.setItems(depositList);
 		productsTbl.setItems(productList);
 
+		// Make TableColumn Editable with
+		// setCellFactory(TextFieldTableCell.forTableColumn() method
+		descriptionCol.setCellFactory(TextFieldTableCell.forTableColumn());
+		costCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+		utilCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+		priceCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+		inventoryCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+
 		// Bind the Column with the data
-		codeCol.setCellValueFactory(data -> data.getValue().IdProductosProperty());
-		descriptionCol.setCellValueFactory(data -> data.getValue().DescripcionProductoProperty());
-		costCol.setCellValueFactory(data -> data.getValue().CostoProductoProperty().asObject());
-		utilCol.setCellValueFactory(data -> data.getValue().UtilidadProductoProperty().asObject());
-		priceCol.setCellValueFactory(data -> data.getValue().PrecioProductoProperty().asObject());
-		inventoryCol.setCellValueFactory(data -> data.getValue().ExistenciaProductoProperty().asObject());
-		depositCol.setCellValueFactory(dataDep -> dataDep.getValue().getDeposito().DescripcionDepositoProperty());
+		codeCol.setCellValueFactory(cellData -> cellData.getValue().IdProductosProperty());
+		descriptionCol.setCellValueFactory(cellData -> cellData.getValue().DescripcionProductoProperty());
+		costCol.setCellValueFactory(cellData -> cellData.getValue().CostoProductoProperty().asObject());
+		utilCol.setCellValueFactory(cellData -> cellData.getValue().UtilidadProductoProperty().asObject());
+		priceCol.setCellValueFactory(cellData -> cellData.getValue().PrecioProductoProperty().asObject());
+		inventoryCol.setCellValueFactory(cellData -> cellData.getValue().ExistenciaProductoProperty().asObject());
+		depositCol.setCellValueFactory(cellData -> cellData.getValue().getDeposito().DescripcionDepositoProperty());
 
 	}
 
@@ -100,10 +101,13 @@ public class MainView implements Initializable {
 	 */
 	@FXML
 	private void create() {
-//		product.createProduct(txtCode.getText(), txtDescription.getText(), Double.parseDouble(txtCost.getText()),
-//				Double.parseDouble(txtUtil.getText()), Double.parseDouble(txtPrice.getText()),
-//				Double.parseDouble(txtInventory.getText()), depositCbo.getValue().getDescripcionDeposito());
-//		cancel();
+		// product.createProduct(txtCode.getText(), txtDescription.getText(),
+		// Double.parseDouble(txtCost.getText()),
+		// Double.parseDouble(txtUtil.getText()),
+		// Double.parseDouble(txtPrice.getText()),
+		// Double.parseDouble(txtInventory.getText()),
+		// depositCbo.getValue().getDescripcionDeposito());
+		// cancel();
 	}
 
 	/**

@@ -1,5 +1,3 @@
-mysqldump --skip-disable-keys;
-
 DROP TABLE IF EXISTS `deposito`;
 CREATE TABLE `deposito` (
   `idDeposito` int(11) NOT NULL AUTO_INCREMENT,

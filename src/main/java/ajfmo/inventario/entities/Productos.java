@@ -42,12 +42,17 @@ public class Productos implements java.io.Serializable {
 		this.descripcionProducto = new SimpleStringProperty(descripcionProducto);
 		this.costoProducto = new SimpleDoubleProperty(costoProducto);
 		this.utilidadProducto = new SimpleDoubleProperty(utilidadProducto);
-		this.precioProducto = new SimpleDoubleProperty(precioProducto);
+		this.precioProducto = new SimpleDoubleProperty(costoProducto / 100 - utilidadProducto / 100);
 		// Magia
-		this.precioProducto
-				.bind(this.costoProducto.multiply(this.costoProducto.subtract(this.utilidadProducto).divide(100)));
+		this.precioProducto.bind(this.costoProducto.multiply(this.precioProducto));
 		this.existenciaProducto = new SimpleDoubleProperty(existenciaProducto);
 		this.deposito = depositoProducto;
+	}
+
+	public Productos(Double costoProducto, Double utilidadProducto, Double precioProducto) {
+		this.costoProducto = new SimpleDoubleProperty(costoProducto);
+		this.utilidadProducto = new SimpleDoubleProperty(utilidadProducto);
+		this.precioProducto.bind(this.costoProducto.multiply(this.precioProducto));
 	}
 
 	// idProductos
@@ -257,9 +262,13 @@ public class Productos implements java.io.Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Productos [idProductos=" + idProductos + ", descripcionProducto=" + descripcionProducto
-				+ ", costoProducto=" + costoProducto + ", precioProducto=" + precioProducto + ", existenciaProducto="
-				+ existenciaProducto + ", deposito=" + deposito + "]";
+		return "Productos [idProductos=" + idProductos + ", _idProductos=" + _idProductos + ", descripcionProducto="
+				+ descripcionProducto + ", _descripcionProducto=" + _descripcionProducto + ", costoProducto="
+				+ costoProducto + ", _costoProducto=" + _costoProducto + ", utilidadProducto=" + utilidadProducto
+				+ ", _utilidadProducto=" + _utilidadProducto + ", precioProducto=" + precioProducto
+				+ ", _precioProducto=" + _precioProducto + ", existenciaProducto=" + existenciaProducto
+				+ ", _existenciaProducto=" + _existenciaProducto + ", deposito=" + deposito + ", _deposito=" + _deposito
+				+ "]";
 	}
 
 }
